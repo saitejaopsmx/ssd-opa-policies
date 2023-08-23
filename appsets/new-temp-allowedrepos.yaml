@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: allowedrepos-temp
+spec:
+  generators:
+  - clusters: {}
+  template:
+    metadata:
+      name: '{{name}}'
+    spec:
+      project: "default"
+      source:
+        repoURL: https://github.com/saitejaopsmx/ssd-policies.git
+        targetRevision: HEAD
+        path: appsets/
+      destination:
+        server: '{{server}}'
+        namespace: dsargo
